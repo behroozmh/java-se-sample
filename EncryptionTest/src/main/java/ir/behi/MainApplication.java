@@ -1,20 +1,15 @@
 package ir.behi;
 
-import ir.behi.tools.MyCrypto;
-
-import javax.crypto.BadPaddingException;
-import javax.crypto.IllegalBlockSizeException;
-import javax.crypto.NoSuchPaddingException;
-import java.security.InvalidAlgorithmParameterException;
-import java.security.InvalidKeyException;
-import java.security.NoSuchAlgorithmException;
-import java.security.spec.InvalidKeySpecException;
+import ir.behi.tools.AESCryptoCBC;
+import ir.behi.tools.AESSimple;
 
 public class MainApplication {
-    public static void main(String[] args) throws NoSuchAlgorithmException, InvalidKeySpecException,
-            InvalidAlgorithmParameterException, NoSuchPaddingException,
-            IllegalBlockSizeException, BadPaddingException, InvalidKeyException {
+    public static void main(String[] args) throws Exception {
+//        TestAESCBC();
+        TestAESSimple();
+    }
 
+    private static void TestAESCBC() throws Exception {
         String text = "SakhadSecret";
         System.out.println("## Plain First=" + text);
 
@@ -24,14 +19,24 @@ public class MainApplication {
         String salt = "qwertyuiopasdfghjklzxcvbnm";
         System.out.println("## Plain salt=" + salt);
 
-        String encryptText = MyCrypto.encrypt(MyCrypto.ALGORITHM, text,
-                MyCrypto.getKeyFromPassword(password, salt),
-                MyCrypto.generateIv());
+        String encryptText = AESCryptoCBC.encrypt(AESCryptoCBC.ALGORITHM, text,
+                AESCryptoCBC.getKeyFromPassword(password, salt),
+                AESCryptoCBC.generateIv());
         System.out.println("## Plain encryptText=" + encryptText);
 
-        String decryptText = MyCrypto.decrypt(MyCrypto.ALGORITHM, encryptText,
-                MyCrypto.getKeyFromPassword(password, salt),
-                MyCrypto.generateIv());
+        String decryptText = AESCryptoCBC.decrypt(AESCryptoCBC.ALGORITHM, encryptText,
+                AESCryptoCBC.getKeyFromPassword(password, salt),
+                AESCryptoCBC.generateIv());
         System.out.println("## Plain decryptText=" + decryptText);
+    }
+
+    private static void TestAESSimple() throws Exception {
+        AESSimple aes_encryption = new AESSimple();
+        aes_encryption.init();
+        String encryptedData = aes_encryption.encrypt("Hello, welcome to the encryption world");
+        String decryptedData = aes_encryption.decrypt(encryptedData);
+
+        System.out.println("Encrypted Data : " + encryptedData);
+        System.out.println("Decrypted Data : " + decryptedData);
     }
 }

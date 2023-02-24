@@ -12,7 +12,7 @@ import java.security.spec.InvalidKeySpecException;
 import java.security.spec.KeySpec;
 import java.util.Base64;
 
-public class MyCrypto {
+public class AESCryptoCBC {
     public final static String ALGORITHM="AES";
     public final static String MODE ="PBKDF2WithHmacSHA256";
     /**
