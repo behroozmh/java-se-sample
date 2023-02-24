@@ -3,10 +3,11 @@ package ir.behi;
 import ir.behi.tools.AESCryptoCBC;
 import ir.behi.tools.AESSimple;
 
-public class MainApplication {
+public class Main {
+
     public static void main(String[] args) throws Exception {
-//        TestAESCBC();
-        TestAESSimple();
+        TestAESCBC();
+//        TestAESSimple();
     }
 
     private static void TestAESCBC() throws Exception {
