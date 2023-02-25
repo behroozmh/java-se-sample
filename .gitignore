@@ -30,6 +30,7 @@ out/
 !**/src/main/**/out/
 !**/src/test/**/out/
 .idea/
+/target/
 
 ### NetBeans ###
 /nbproject/private/
@@ -40,3 +41,4 @@ out/
 
 ### VS Code ###
 .vscode/
+
