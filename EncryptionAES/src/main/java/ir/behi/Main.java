@@ -6,28 +6,24 @@ import ir.behi.tools.AESSimple;
 public class Main {
 
     public static void main(String[] args) throws Exception {
-//        TestAESCBC();
-        TestAESSimple();
+        TestAESCBC();
+//        TestAESSimple();
     }
 
     private static void TestAESCBC() throws Exception {
-        String text = "SakhadSecret";
+        String text = "jdbc:postgresql://localhost:5432/mydb";
         System.out.println("## Plain First=" + text);
-
         String password = "ThisIsSpartaThisIsSparta";
         System.out.println("########## Plain password=" + password);
 
-        String salt = "qwertyuiopasdfghjklzxcvbnm";
+        String salt = "qwertyuiopasdfghjklzxc";
         System.out.println("########## Plain salt=" + salt);
 
-        String encryptText = AESCryptoCBC.encrypt(AESCryptoCBC.ALGORITHM, text,
-                AESCryptoCBC.getKeyFromPassword(password, salt),
-                AESCryptoCBC.generateIv());
+        String encryptText = AESCryptoCBC.encrypt2(text);
         System.out.println("########## Plain encryptText=" + encryptText);
 
-        String decryptText = AESCryptoCBC.decrypt(AESCryptoCBC.ALGORITHM, encryptText,
-                AESCryptoCBC.getKeyFromPassword(password, salt),
-                AESCryptoCBC.generateIv());
+        String decryptText = AESCryptoCBC.decrypt(encryptText, AESCryptoCBC.getKeyFromPassword(password, salt));
+
         System.out.println("########## Plain decryptText=" + decryptText);
     }
 
@@ -35,7 +31,7 @@ public class Main {
         AESSimple aes_encryption = new AESSimple();
 //        aes_encryption.writeProviderToFile();
         aes_encryption.init("123");
-        String text="Hello, welcome to the encryption world";
+        String text = "Hello, welcome to the encryption world";
         System.out.println("########## Base Data Text: " + text);
         String encryptedData = aes_encryption.encrypt(text);
         String decryptedData = aes_encryption.decrypt(encryptedData);
