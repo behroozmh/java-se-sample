@@ -6,7 +6,7 @@
     <groupId>ir.behi</groupId>
     <artifactId>EncryptionAES</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <packaging>war</packaging>
+    <packaging>jar</packaging>
     <name>java-se-AES</name>
     <description>Java SE code Sample of Encryption</description>
 
