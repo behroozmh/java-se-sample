@@ -14,7 +14,7 @@ import java.util.Base64;
 
 public class AESSimple {
     public final static String ALGORITHM = "AES";
-    public final static String ENCRYPTION_MODE = "AES/GCM/NoPadding";
+    public final static String AESGCMNoPadding = "AES/GCM/NoPadding";
     private SecretKey key;
     private final int KEY_SIZE = 128; // 128,192,256
     private final int DATA_LENGTH = 128;
@@ -34,7 +34,7 @@ public class AESSimple {
 
     public String encrypt(String data) throws Exception {
         byte[] dataInBytes = data.getBytes();
-        encryptionCipher = Cipher.getInstance(ENCRYPTION_MODE);
+        encryptionCipher = Cipher.getInstance(AESGCMNoPadding);
         encryptionCipher.init(Cipher.ENCRYPT_MODE, key);
         byte[] encryptedBytes = encryptionCipher.doFinal(dataInBytes);
         return encode(encryptedBytes);
@@ -42,7 +42,8 @@ public class AESSimple {
 
     public String decrypt(String encryptedData) throws Exception {
         byte[] dataInBytes = decode(encryptedData);
-        Cipher decryptionCipher = Cipher.getInstance(ENCRYPTION_MODE);
+        Cipher decryptionCipher = Cipher.getInstance(AESGCMNoPadding);
+
         GCMParameterSpec spec = new GCMParameterSpec(DATA_LENGTH, encryptionCipher.getIV());
         decryptionCipher.init(Cipher.DECRYPT_MODE, key, spec);
         byte[] decryptedBytes = decryptionCipher.doFinal(dataInBytes);
@@ -63,6 +64,7 @@ public class AESSimple {
         Files.createFile(path);
         KeyGenerator.getInstance(ALGORITHM).getProvider().values().stream()
                 .map(m -> m.toString())
+                .distinct()
                 .sorted()
                 .forEach(f -> {
                     try {
