@@ -20,12 +20,6 @@ public class AESSimple {
     private final int DATA_LENGTH = 128;
     private Cipher encryptionCipher;
 
-    public void init(String passwordKey) throws Exception {
-        KeyGenerator keyGenerator = KeyGenerator.getInstance(ALGORITHM);
-        keyGenerator.init(KEY_SIZE);
-        key = keyGenerator.generateKey();
-    }
-
     public void init() throws Exception {
         KeyGenerator keyGenerator = KeyGenerator.getInstance(ALGORITHM);
         keyGenerator.init(KEY_SIZE);
@@ -60,7 +54,7 @@ public class AESSimple {
 
     public static void writeProviderToFile() throws NoSuchAlgorithmException, IOException {
         String fileName = "AESProviders.txt";
-        Path path= Paths.get(fileName);
+        Path path = Paths.get(fileName);
         Files.createFile(path);
         KeyGenerator.getInstance(ALGORITHM).getProvider().values().stream()
                 .map(m -> m.toString())
@@ -68,7 +62,7 @@ public class AESSimple {
                 .sorted()
                 .forEach(f -> {
                     try {
-                        Files.write(path, (f+"\n").getBytes(), StandardOpenOption.APPEND);
+                        Files.write(path, (f + "\n").getBytes(), StandardOpenOption.APPEND);
                     } catch (Exception ex) {
                         ex.printStackTrace();
                     }
