@@ -11,6 +11,7 @@ import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.security.NoSuchAlgorithmException;
 import java.util.Base64;
+import java.util.regex.Pattern;
 
 public class AESSimple {
     public final static String ALGORITHM = "AES";
@@ -25,6 +26,12 @@ public class AESSimple {
         keyGenerator.init(KEY_SIZE);
         key = keyGenerator.generateKey();
     }
+
+    public static boolean isEncrypt(String text){
+        String pattern= "^([A-Za-z0-9+/]{4})*([A-Za-z0-9+/]{3}=|[A-Za-z0-9+/]{2}==)?$";
+        return Pattern.compile(pattern).matcher(text).find();
+    }
+
 
     public String encrypt(String data) throws Exception {
         byte[] dataInBytes = data.getBytes();

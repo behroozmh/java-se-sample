@@ -114,4 +114,8 @@ public class AESCryptoCBC {
         byte[] outputBytes = cipher.doFinal(cipherText.getBytes(StandardCharsets.UTF_8));
         return Base64.getEncoder().encodeToString(outputBytes);
     }
+
+    public static boolean isEncrypt(String text){
+        return org.apache.commons.codec.binary.Base64.isArrayByteBase64(text.getBytes());
+    }
 }
