@@ -19,12 +19,17 @@ public class Main {
         String salt = "qwertyuiopasdfghjklzxc";
         System.out.println("########## Plain salt=" + salt);
 
+        boolean isSalt=AESCryptoCBC.isEncrypt(salt);
+
         String encryptText = AESCryptoCBC.encrypt(text,AESCryptoCBC.PBKDF2WithHmacSHA256,password,salt);
+        boolean isEncryptText=AESCryptoCBC.isEncrypt(encryptText);
+
         System.out.println("########## Plain encryptText=" + encryptText);
 
         String decryptText = AESCryptoCBC.decrypt(encryptText, AESCryptoCBC.getKeyFromPassword(AESCryptoCBC.PBKDF2WithHmacSHA256,password, salt));
 
         System.out.println("########## Plain decryptText=" + decryptText);
+
     }
 
     private static void TestAESSimple() throws Exception {
